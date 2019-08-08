@@ -1,0 +1,24 @@
+To publish to SQS you need to update SQS Policy to allow SNS to publish messages.
+a. Publishing to an Amazon SQS Queue (requires manually configuring permissions at sqs level)
+http://docs.aws.amazon.com/sns/latest/dg/AccessPolicyLanguage_UseCases_Sns.html?shortFooter=true
+
+{
+  "Version": "2012-10-17",
+  "Id": "arn:aws:sqs:us-west-2:<AWS ACCOUNT>:queueDemo/SQSDefaultPolicy",
+  "Statement": [
+    {
+      "Sid": "Sid1493317673578",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "SQS:SendMessage",
+      "Resource": "arn:aws:sqs:us-west-2:<AWS ACCOUNT>:myQueueStandard",
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "arn:aws:sns:us-west-2:<AWS ACCOUNT>:demoTopic"
+        }
+      }
+    }
+  ]
+}
+
+b. Subscribe to SNS topic directly from SQS queue.  This automatically manages permissions and simpler

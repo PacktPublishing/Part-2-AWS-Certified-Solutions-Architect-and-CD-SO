@@ -1,0 +1,38 @@
+Demo: Split a shard to handle more volume
+1. Check Shard for hashkey range used
+aws kinesis describe-stream --stream-name kinesisTest --profile myadmin
+
+2. Split the Shard into two child shards.  Parent shard would still have data. Any new data
+is distributed among the two child shards.
+
+aws kinesis split-shard --stream-name kinesisTest --shard-to-split shardId-000000000000 --new-starting-hash-key 170141183460469231731687303715884105727 --profile myadmin
+Before:
+"ShardId": "shardId-000000000000",
+                "HashKeyRange": {
+                    "EndingHashKey": "340282366920938463463374607431768211455",
+                    "StartingHashKey": "0"
+                }
+                
+After:
+"ShardId": "shardId-000000000001",
+                "HashKeyRange": {
+                    "EndingHashKey": "170141183460469231731687303715884105726",
+                    "StartingHashKey": "0"
+                }
+"ShardId": "shardId-000000000002",
+                "HashKeyRange": {
+                    "EndingHashKey": "340282366920938463463374607431768211455",
+                    "StartingHashKey": "170141183460469231731687303715884105727"
+                }
+"ShardId": "shardId-000000000000",
+                "HashKeyRange": {
+                    "EndingHashKey": "340282366920938463463374607431768211455",
+                    "StartingHashKey": "0"
+                }                
+                
+3. Put Records
+aws kinesis put-record --stream-name kinesisTest --partition-key P1 --data "message 100" --profile myadmin               
+aws kinesis put-record --stream-name kinesisTest --partition-key P3 --data "message 500" --profile myadmin     
+aws kinesis put-record --stream-name kinesisTest --partition-key P1 --data "message 102" --profile myadmin     
+aws kinesis put-record --stream-name kinesisTest --partition-key P3 --data "message 501" --profile myadmin
+aws kinesis put-record --stream-name kinesisTest --partition-key P1 --data "message 103" --profile myadmin

@@ -1,0 +1,43 @@
+Objective: Expose microservices/container from well defined end points
+using Application Load Balancer
+
+Applications/Consumers talk to ALB using port 80 or 443 or other well defined static
+ports.
+
+Internally, load balancer distributes the traffic across container instances that are
+exposed through ephimeral ports.  ALB takes care of instance:port tracking.
+
+In this example, we are going to create a Service under a cluster. Service
+is intended for long running tasks.
+
+1. Create an ALB "ALBDemo"
+2. SG - Pick LoadBalancerSG
+3. Define a Target Group TargetGroupDemo
+4. Specify Protocol as HTTP and Port as 80.  What this really means is that
+forward the requests from ALB to registered hosts in the target group at port 80. However,
+with containers, it has a slightly different meaning. It says forward the requests to 
+registered containers to container port 80.
+5. Change healthy threshold to 2.
+6. Dont register any targets yet
+7. Create ALB
+
+Grant Service Role
+http://docs.aws.amazon.com/AmazonECS/latest/developerguide/check-service-role.html
+
+1. Create Service "ServiceDemo"
+2. In task definition, pick version 2 of the taskDemo 
+3. Select "ECSDemo" Cluster.  We are going to run our tasks in the ECSDemo cluster
+4. Number of tasks - specify 1 for now
+Min health percent
+Maximum Percent
+
+5. Under Optional Configuration
+    Select "Configure ELB"
+    Select the ALBDemo
+    Select the helloworldContainer:0:80 to ELB
+    Pick LB Listener port as 80
+    Select "Create new target group"
+    Pick the targetgroup "TargetGroupDemo"
+    Path Pattern "/"
+    Save
+6. Create Service

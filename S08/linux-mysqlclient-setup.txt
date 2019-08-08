@@ -1,0 +1,31 @@
+Objective: 
+1. Test MySQL connectivity using nc (linux) and telnet (windows)
+2. Connect to MySQL instance
+
+
+VPC - When adding subnets, make sure route table allows traffic
+
+Install MySQL Client:
+sudo yum install mysql
+
+Test Connectivity
+Linux: nc -zv <host name> 3306
+Windows: telnet <host name> 3306
+
+Troubleshooting Connectivity Issues:
+http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html
+http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Troubleshooting.html?shortFooter=true#CHAP_Troubleshooting.Connecting
+
+To Connect (make sure MySQL DB security group allows access from the instance):
+mysql -h <host name> -P 3306 -u dbadmin -p
+
+Query:
+#INSERT INTO demodb.employee (id, name, age) VALUES (1, 'A', 20);
+#INSERT INTO demodb.employee (id, name, age) VALUES (2, 'B', 25);
+#INSERT INTO demodb.employee (id, name, age) VALUES (3, 'C', 30);
+#INSERT INTO demodb.employee (id, name, age) VALUES (4, 'D', 35);
+#INSERT INTO demodb.employee (id, name, age) VALUES (5, 'E', 40);
+
+SELECT * FROM demodb.employee;
+
+

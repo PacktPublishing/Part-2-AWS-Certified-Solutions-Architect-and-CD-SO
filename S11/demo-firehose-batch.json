@@ -1,0 +1,19 @@
+{
+    "DeliveryStreamName": "firehoseTest",
+    "Records": [{
+        "Data": "{\"message\":\"Message Batch - 1\"}"
+    },{
+        "Data": "{\"message\":\"Message Batch - 2\"}"
+    },{
+        "Data": "{\"message\":\"Message Batch - 3\"}"
+    },{
+        "Data": "{\"message\":\"Message Batch - 4\"}"
+    },{
+        "Data": "{\"message\":\"Message Batch - 5\"}"
+    },{
+        "Data": "{\"message\":\"Message Batch - 6\"}"
+    },{
+        "Data": "{\"message\":\"Message Batch - 7\"}"
+    }
+    ]
+}

@@ -1,0 +1,47 @@
+Objective: Orchestrate Containers with ECS. ECS Setup.
+
+1. Create Cluster: ECSDemo
+2. Select t2.micro as instance type with number of instances set to 1
+3. It uses ECS optimized AMI
+4. Behind the scenes, it is creating an autoscaling group and this 
+is the launch configuration used by the ASG.
+5. Create new Security Group with http port 80 access
+6. It will also create an EC2 Instance Role named ecsInstanceRole
+that will grant necessary privileges for container agent to talk to ECS
+7. Click "create"
+8. Behind the scenes, it uses cloudformation to create the required resources
+9. Create Task definition "TaskDemo"
+10. Leave the network mode as "bridge" -> locally running 
+containers connect to the same bridge network  are able to talk 
+to each other using ip address
+Reference: https://docs.docker.com/engine/userguide/networking/
+11. Add Container "helloWorldContainer"
+12. Specify image.  If you are using docker repository,
+specify the image name as:
+<username>/<repository>:tag
+demolearn/friendlyhello:version1
+13. 100MB as memory limit
+14. Port Mappings do a static mapping:
+    80 (host)
+    80 (container port)
+15. Add the container definition
+16. Click "Create" to add task definition
+17. Manually run 1 task
+18. Open container that is running and visit the url
+19. If you attempt to run another instance now, since the host port 80 is already taken,
+you will get an error
+20. Create a new version of the task.
+21. This time, specify host port as 0 in the container definition
+22. Now we have two versions of the task.
+23. Run the 2nd version of the task.
+24. Since ephemeral ports are used, a different host port is used by the container
+25. Open up security group to allow all TCP Port access for this demolearn/friendlyhello
+26. Now run one more task using version 2 of the task definition
+27. What this now allows you is that you don't have to worry about host port conflicts
+when multiple teams are working on different containers. you don't have to coordinate
+port usage
+28. Now the challenge is how are clients going to know the port to use? that we will
+cover in the next lecture.
+29. Remove the all ports permission in the security group.
+30. Stop the task
+

@@ -1,0 +1,13 @@
+Parameters:
+    BucketNameParameter:
+        Type: String
+        Default: hello-bucket-chandra-201712
+        Description: Enter Bucket Name
+Resources:
+    HelloBucket:
+        Type: AWS::S3::Bucket
+        Properties:
+            BucketName: !Ref BucketNameParameter
+Outputs:
+  BucketName:
+    Value: !Ref 'HelloBucket'      

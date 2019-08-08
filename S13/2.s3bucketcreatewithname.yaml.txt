@@ -1,0 +1,8 @@
+Resources:
+    HelloBucket:
+        Type: AWS::S3::Bucket
+        Properties:
+            BucketName: "hello-bucket-chandra-201712"
+Outputs:
+  BucketName:
+    Value: !Ref 'HelloBucket'      

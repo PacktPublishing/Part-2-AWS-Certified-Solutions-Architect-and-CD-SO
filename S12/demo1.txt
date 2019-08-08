@@ -1,0 +1,29 @@
+# Manual Docker Setup
+# 1. Create Security Group and Launch EC2 Instance
+# 2. Install Docker on standard AWS Instance
+# 3. Run docker hello world
+
+# http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html
+
+1. Create Security Group (ContainerInstanceSG)
+   SSH from 0.0.0.0/0
+   HTTP from 0.0.0.0/0
+   TCP Port 4000 from 0.0.0.0/0
+   
+2. Launch EC2 instance   
+
+2. Install Docker on Standard AWS Instance
+sudo yum update -y
+sudo yum install -y docker
+sudo chkconfig docker on
+chkconfig --list docker 
+sudo usermod -a -G docker ec2-user
+reboot the instance to make sure all settings are in effect
+3. Display system wide information and run hello world container
+    docker info
+    docker run hello-world  (download hello-world image from docker hub and run it)
+4. docker images
+    List available images
+5. docker ps (https://docs.docker.com/engine/reference/commandline/ps/)
+   List containers
+

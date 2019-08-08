@@ -1,0 +1,25 @@
+1. GET function - simply returns 'Hello world'
+
+2. POST function - parses json, constructs a response that concatenates product,
+currency and price
+
+{
+  "product":"AWS Certification",
+  "price":"25",
+  "currency":"USD"
+}
+
+3. Invoke Lambda from CLI
+https://docs.aws.amazon.com/cli/latest/reference/lambda/invoke.html
+
+# hello_world_get
+aws lambda invoke --invocation-type RequestResponse --function-name hello_world_get  out.txt --profile myadmin  --log-type Tail
+
+# hello_world_post demo with payload
+aws lambda invoke --invocation-type RequestResponse --function-name hello_world_post  out.txt --profile myadmin  --log-type Tail --payload file://hello_world_data.json
+
+
+4. URL To Query (make sure you include resource)
+https://<>.execute-api.us-west-2.amazonaws.com/beta/product
+
+5. 

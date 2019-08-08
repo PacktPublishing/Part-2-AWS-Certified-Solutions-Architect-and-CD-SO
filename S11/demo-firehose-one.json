@@ -1,0 +1,6 @@
+{
+    "DeliveryStreamName": "firehoseTest",
+    "Record": {
+        "Data": "{\"msg\":\"Message 1001\"}"
+    }
+}

@@ -1,0 +1,20 @@
+CLI (update cli-fifo queue is a new capability):
+http://docs.amazonaws.cn/cli/latest/reference/sqs/send-message.html
+
+
+Standard Queue:
+--Send Message
+aws sqs send-message --queue-url https://sqs.us-west-2.amazonaws.com/ACCOUNT-NUMBER/myQueueStandard --message-body "Hello Queue!" --profile myadmin
+
+--Receive Message
+aws sqs receive-message --queue-url https://sqs.us-west-2.amazonaws.com/ACCOUNT-NUMBER/myQueueStandard --profile myadmin
+
+--Delete Message
+aws sqs delete-message --queue-url https://sqs.us-west-2.amazonaws.com/ACCOUNT-NUMBER/myQueueStandard  --profile myadmin --receipt-handle ""
+
+Send messages:
+1. message 1 through 5.
+
+
+--Receive Message 
+aws sqs receive-message --queue-url https://sqs.us-west-2.amazonaws.com/ACCOUNT-NUMBER/myQueueStandard --profile myadmin --max-number-of-messages 5

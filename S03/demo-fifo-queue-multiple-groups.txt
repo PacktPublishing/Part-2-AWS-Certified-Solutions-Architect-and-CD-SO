@@ -1,0 +1,21 @@
+CLI (update cli-fifo queue is a new capability):
+http://docs.amazonaws.cn/cli/latest/reference/sqs/send-message.html
+
+
+FIFO Group Demo
+Message, Group, Deduplication ID
+1. Video 1,G1,1
+2. Image 1,G2,2
+3. Video 2,G1,3
+4. Image 2,G2,4
+5. Video 3,G1,5
+
+aws sqs send-message --queue-url https://sqs.us-west-2.amazonaws.com/ACCOUNT-NUMBER/myQueueFIFO.fifo --profile myadmin --message-body "Video 1" --message-deduplication-id "1" --message-group-id "G1"
+aws sqs send-message --queue-url https://sqs.us-west-2.amazonaws.com/ACCOUNT-NUMBER/myQueueFIFO.fifo --profile myadmin --message-body "Image 1" --message-deduplication-id "2" --message-group-id "G2"
+aws sqs send-message --queue-url https://sqs.us-west-2.amazonaws.com/ACCOUNT-NUMBER/myQueueFIFO.fifo --profile myadmin --message-body "Video 2" --message-deduplication-id "3" --message-group-id "G1"
+aws sqs send-message --queue-url https://sqs.us-west-2.amazonaws.com/ACCOUNT-NUMBER/myQueueFIFO.fifo --profile myadmin --message-body "Image 2" --message-deduplication-id "4" --message-group-id "G2"
+aws sqs send-message --queue-url https://sqs.us-west-2.amazonaws.com/ACCOUNT-NUMBER/myQueueFIFO.fifo --profile myadmin --message-body "Video 3" --message-deduplication-id "5" --message-group-id "G1"
+
+aws sqs receive-message --queue-url https://sqs.us-west-2.amazonaws.com/ACCOUNT-NUMBER/myQueueFIFO.fifo --profile myadmin
+
+aws sqs receive-message --max-number-of-messages 2 --queue-url https://sqs.us-west-2.amazonaws.com/ACCOUNT-NUMBER/myQueueFIFO.fifo --profile myadmin

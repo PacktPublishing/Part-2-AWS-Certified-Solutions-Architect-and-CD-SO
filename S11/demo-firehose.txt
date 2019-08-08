@@ -1,0 +1,8 @@
+### Generate Skeleton JSON Payload
+aws firehose put-record --generate-cli-skeleton --profile myadmin
+aws firehose put-record-batch --generate-cli-skeleton --profile myadmin
+
+#### Put one record
+aws firehose put-record --profile myadmin --cli-input-json file://Demo-Firehose-one.json
+#### Put Multiple Records
+aws firehose put-record-batch --profile myadmin --cli-input-json file://Demo-Firehose-batch.json

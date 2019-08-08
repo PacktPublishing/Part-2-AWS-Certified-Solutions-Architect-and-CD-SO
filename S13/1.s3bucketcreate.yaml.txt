@@ -1,0 +1,6 @@
+Resources:
+    HelloBucket:
+        Type: AWS::S3::Bucket
+Outputs:
+  BucketName:
+    Value: !Ref 'HelloBucket'      

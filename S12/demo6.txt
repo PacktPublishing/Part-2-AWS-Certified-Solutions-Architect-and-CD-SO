@@ -1,0 +1,6 @@
+Objective: Scaleout by adding more EC2 instances
+
+Steps:
+1. Select Cluster
+2. Under EC2 Instances, select "Scale ECS Instances"
+3. Change instance count to 2

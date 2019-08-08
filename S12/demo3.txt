@@ -1,0 +1,30 @@
+Objective: Share the containerized app using registry hub.docker.com
+Reference: https://docs.docker.com/get-started/part2/#publish-the-image
+
+1. Create an account at hub.docker.com
+2. You can store your images as a public image (accessible by anyone) or subscribe  
+to store as private images
+3. To connect to repository
+    docker login
+    enter credentials
+4. Tag your local friendlyhello images. 
+Tagging an image allows you to locate specific version of an image.
+Standard convention for tagging is: username/repository:version
+
+    docker tag <imagename> <username>/<repository>:tag
+    
+    docker tag friendlyhello demolearn/friendlyhello:version1
+    docker images    
+5. Push the image to registry
+    docker push demolearn/friendlyhello:version1
+   
+6. Launch another EC2 instance with Security Group ContainerInstanceSG
+    sudo yum update -y
+    sudo yum install -y docker
+    sudo chkconfig docker on
+    chkconfig --list docker 
+    sudo usermod -a -G docker ec2-user
+    reboot the instance
+7. Run the container app from this instance
+    docker run -p 4000:80 demolearn/friendlyhello:version1
+    visit url http://<machine-name>:4000

@@ -1,0 +1,24 @@
+Demo Kinesis Streams
+Kinesis CLI
+http://docs.aws.amazon.com/cli/latest/reference/kinesis/index.html
+
+1. From Kinesis Management Console create a stream "kinesisTest"
+
+2. From CLI, check the stream meta-data and characteristics
+aws kinesis describe-stream --stream-name kinesisTest --profile myadmin
+
+3. Put Records -note the shard id that is returned back
+aws kinesis put-record --stream-name kinesisTest --partition-key P1 --data "message 1" --profile myadmin
+aws kinesis put-record --stream-name kinesisTest --partition-key P2 --data "message 2" --profile myadmin
+aws kinesis put-record --stream-name kinesisTest --partition-key P1 --data "message 3" --profile myadmin
+aws kinesis put-record --stream-name kinesisTest --partition-key P1 --data "message 4" --profile myadmin
+aws kinesis put-record --stream-name kinesisTest --partition-key P1 --data "message 5" --profile myadmin
+4. Get Shard Iterator
+aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON --stream-name kinesisTest --profile myadmin
+
+5. Get Records
+aws kinesis get-records --limit 2 --shard-iterator AAAAAAAAAAFF4yPv3sffpRT7rATc8ICk9cRgZyAx4AWuN3IaU6Yb1hRs6bbC/tNKonGeAjZhBgVCopLqDz238AxjQyHMdn4cF+DwkFpmQU8cBcDLHV752Fcf7JjKVsWsqTCCIsm5LHMRfNe/zor2rx3Ehno+iVg9dgfA/JTCe7NTI8ugS3eyDC5RDwSzUUnV834K7QX09R+ICh+aj0+Rz/RG3wsYDDG9 --profile myadmin
+
+6. Get Next Batch of Records
+aws kinesis get-records --shard-iterator AAAAAAAAAAFtTkPpBkhq1+bSWfV0Aar+vdBNq7EJzvWPx/X4TFF3uiO0FpqWgdQMQv93qEcQUWkpxbKEgXUhFqAjkhnC/yIx3z7Vp5TKY9f+AZTH96J7uCw0X0mjhrvFjeMf+JiV43R0s+Ry1GdHYtRwHL0p7DmBYErcbUXVJr0AR02okfGxovOIlyHxHhzd/bY33R8ZAQWMDSHgV6NP1d0x550FUuP6 --profile myadmin
+
